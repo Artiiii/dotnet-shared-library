@@ -6,7 +6,7 @@ def call(build)
   Compress-Archive -Path PublishFolder/* -DestinationPath app.zip
   
   $publishUrl='http://localhost:8081/repository/dotnet-build-artifacts/dotnetcore/sample/${build}/app.zip'
-  $packageName = 'PublishFolder/app.zip'
+  $packageName = 'app.zip'
   $params = @{
   UseBasicParsing = $true
   Uri             = $publishUrl
