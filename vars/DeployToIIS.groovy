@@ -1,6 +1,6 @@
 def call()
 {
-powershell label:'' script: """
+powershell label:'', script: """
 Set-Item 'WSMan:localhost/client/trustedhosts' -value '40.114.48.109'
 Enable-PSRemoting -Force
 $User = 'dotnet'
