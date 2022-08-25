@@ -6,5 +6,6 @@ remote.user = user
 remote.password = passwd
 remote.allowAnyHosts = true
 remote.host = "13.82.219.124"
-sshPut remote: remote, from: 'app.zip', into: 'C:/inetpub/wwwroot/'
+sshCommand remote: remote, command: "ls C:/inetpub"
+//sshPut remote: remote, from: 'app.zip', into: 'C:/inetpub/wwwroot/'
 }
