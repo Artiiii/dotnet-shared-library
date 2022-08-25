@@ -1,4 +1,4 @@
-def call(username, password, build)
+def call(build)
 {
   powershell label: '', script: '''
   New-Item "PublishFolder" -itemType Directory
@@ -7,8 +7,6 @@ def call(username, password, build)
   
   $publishUrl='http://localhost:8081/repository/dotnet-build-artifacts/dotnetcore/sample/${build}/app.zip'
   $packageName = 'PublishFolder/app.zip'
-  $username= ${username}
-  $password= ${password}
   $params = @{
   UseBasicParsing = $true
   Uri             = $publishUrl
@@ -16,7 +14,8 @@ def call(username, password, build)
   InFile          = $packageName
   Headers         = @{
     ContentType   = "application/zip"
-    Authorization = "Basic $([System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("$username`:$password")))" 
+   # Authorization = "Basic $([System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("$username`:$password")))" 
+    Authorization = "Basic $nexuslogin"
   }
   Verbose         = $true
   }
