@@ -1,4 +1,7 @@
 def call()
 {
-bat label: '', script: 'mvn clean package'
+bat label: '', script: '''
+dotnet restore
+dotnet build 
+'''
 }
