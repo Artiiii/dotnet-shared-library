@@ -5,7 +5,7 @@ remote.name = 'azurevdotnetvm'
 remote.user = user
 remote.password = passwd
 remote.allowAnyHosts = true
-remote.host = "13.82.219.124"
+remote.host = "40.114.48.109"
 sshCommand remote: remote, command: "ls C:/inetpub"
 //sshPut remote: remote, from: 'app.zip', into: 'C:/inetpub/wwwroot/'
 }
