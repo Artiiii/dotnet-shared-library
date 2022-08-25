@@ -3,9 +3,9 @@ def call()
  powershell label:'', script: '''
   Set-Item 'WSMan:localhost/client/trustedhosts' -value '40.114.48.109' -Force
   Enable-PSRemoting -Force
-  $User='dotnet'
+  #$User='dotnet'
   $Pass=ConvertTo-SecureString -String 'Devops@123456' -AsPlainText -Force
-  $Credential=New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $Pass
+  $Credential=New-Object System.Management.Automation.PSCredential ("dotnet", $Pass)
   $s=New-PSSession -ComputerName '40.114.48.109' -Credential $Credential
   Write-Output $s
   Copy-Item 'app.zip' 'C:/inetpub/wwwroot' -ToSession $s
