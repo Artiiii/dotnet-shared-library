@@ -4,8 +4,7 @@ def call()
   New-Item "PublishFolder" -itemType Directory
   dotnet publish -o PublishFolder
   Compress-Archive -Path PublishFolder/* -DestinationPath app.zip
-  
-  $publishUrl='http://localhost:8081/repository/dotnet-build-artifacts/dotnetcore/sample/${buildid}/app.zip'
+  $publishUrl='http://localhost:8081/repository/dotnet-build-artifacts/dotnetcore/sample/app.zip'
   $packageName = 'app.zip'
   $username = 'admin'
   $password = 'admin'
