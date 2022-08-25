@@ -1,11 +1,11 @@
-def call(build)
+def call()
 {
   powershell label: '', script: '''
   New-Item "PublishFolder" -itemType Directory
   dotnet publish -o PublishFolder
   Compress-Archive -Path PublishFolder/* -DestinationPath app.zip
   
-  $publishUrl='http://localhost:8081/repository/dotnet-build-artifacts/dotnetcore/sample/${build}/app.zip'
+  $publishUrl='http://localhost:8081/repository/dotnet-build-artifacts/dotnetcore/sample/${buildid}/app.zip'
   $packageName = 'app.zip'
   $username = 'admin'
   $password = 'admin'
