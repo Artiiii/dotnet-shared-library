@@ -7,6 +7,7 @@ def call()
   $Pass=ConvertTo-SecureString -String 'Devops@123456' -AsPlainText -Force
   $Credential=New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $Pass
   $s=New-PSSession -ComputerName '40.114.48.109' -Credential $Credential
+  Write-Output $s
   Copy-Item 'app.zip' 'C:/inetpub/wwwroot' -ToSession $s
 '''
 }
