@@ -21,6 +21,5 @@ def call(build)
   Verbose         = $true
   }
   Invoke-WebRequest @params
-  Remove-Item "PublishFolder"
   '''
 }
