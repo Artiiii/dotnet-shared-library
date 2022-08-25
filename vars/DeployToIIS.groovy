@@ -1,4 +1,4 @@
-def call(user, passwd)
+def call()
 {
 powershell label:'' script: """
 Set-Item 'WSMan:localhost\\client\\trustedhosts' -value '40.114.48.109'
