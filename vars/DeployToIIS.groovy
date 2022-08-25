@@ -1,11 +1,12 @@
 def call(user, passwd)
 {
-remote = [:]
-remote.name = 'azurevdotnetvm'
-remote.user = user
-remote.password = passwd
-remote.allowAnyHosts = true
-remote.host = "40.114.48.109"
-sshCommand remote: remote, command: "ls C:/inetpub"
-//sshPut remote: remote, from: 'app.zip', into: 'C:/inetpub/wwwroot/'
+powershell label:'' script: """
+Set-Item WSMan:localhost\client\trustedhosts -value "40.114.48.109"
+Enable-PSRemoting -Force
+$User = "dotnet"
+$PWord = ConvertTo-SecureString -String "Devops@123456" -AsPlainText -Force
+$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
+$s = New-PSSession -ComputerName "40.114.48.109" -Credential $Credential
+Copy-Item 'app.zip' 'C:\inetpub\wwwroot' -ToSession $s
+"""
 }
