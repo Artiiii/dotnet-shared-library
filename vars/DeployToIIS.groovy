@@ -1,7 +1,7 @@
 def call()
 {
  powershell label:'', script: '''
-  Set-Item 'WSMan:localhost/client/trustedhosts' -value '40.114.48.109'
+  Set-Item 'WSMan:localhost/client/trustedhosts' -value '40.114.48.109' -Force
   Enable-PSRemoting -Force
   $User='dotnet'
   $Pass=ConvertTo-SecureString -String 'Devops@123456' -AsPlainText -Force
