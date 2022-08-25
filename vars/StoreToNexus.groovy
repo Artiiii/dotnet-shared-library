@@ -7,6 +7,8 @@ def call(build)
   
   $publishUrl='http://localhost:8081/repository/dotnet-build-artifacts/dotnetcore/sample/${build}/app.zip'
   $packageName = 'app.zip'
+  $username = 'admin'
+  $password = 'admin'
   $params = @{
   UseBasicParsing = $true
   Uri             = $publishUrl
@@ -14,8 +16,7 @@ def call(build)
   InFile          = $packageName
   Headers         = @{
     ContentType   = "application/zip"
-   # Authorization = "Basic $([System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("$username`:$password")))" 
-    Authorization = "Basic $nexuslogin"
+    Authorization = "Basic $([System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("$username`:$password")))" 
   }
   Verbose         = $true
   }
