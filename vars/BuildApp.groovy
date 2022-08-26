@@ -1,6 +1,6 @@
 def call()
 {
-powershell label: '', script: '''
+bat label: '', script: '''
 dotnet new tool-manifest
 dotnet tool install dotnet-ef
 dotnet tool restore
