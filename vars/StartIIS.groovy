@@ -7,6 +7,6 @@ def call()
   $Credential=New-Object System.Management.Automation.PSCredential ("104.41.133.141\\dotnet", $Pass)
   $s=New-PSSession -ComputerName '104.41.133.141' -Credential $Credential
   Write-Output $s
-  Invoke-Command -Session $s {Start-Website "dotnetcore"}
+  Invoke-Command -Session $s {Start-Website "dotnetcore" -Force}
   '''
 }
