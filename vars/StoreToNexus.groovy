@@ -1,4 +1,4 @@
-def call()
+def call(username, password)
 {
   bat label: '', script: '''
   set PATH=%PATH%;C:/Program Files/dotnet/
@@ -10,8 +10,8 @@ def call()
   $version = Get-Content version.txt
   $publishUrl='http://localhost:8081/repository/dotnet-build-artifacts/dotnetcore/sample/'+$version+'/app.zip'
   $packageName = 'app.zip'
-  $username = 'admin'
-  $password = 'admin'
+  $username = ${username}
+  $password = ${password}
   $params = @{
   UseBasicParsing = $true
   Uri             = $publishUrl
