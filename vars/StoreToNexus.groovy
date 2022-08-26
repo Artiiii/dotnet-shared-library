@@ -1,6 +1,7 @@
 def call()
 {
   powershell label: '', script: '''
+  set PATH=%PATH%;C:/Program Files/dotnet/
   New-Item "PublishFolder" -itemType Directory
   dotnet publish -o PublishFolder
   Compress-Archive -Path PublishFolder/* -DestinationPath app.zip
