@@ -11,7 +11,7 @@ def call()
   terraform -chdir=azstorage apply -input=false tfplanaz 
   
   az login --service-principal -u $azcon_CLIENT_ID -p $azcon_CLIENT_SECRET -t $azcon_TENANT_ID
-  ACCOUNT_KEY=$(az storage account keys list --resource-group $RESOURCE_GROUP_NAME --account-name $STORAGE_ACCOUNT_NAME --query '[0].value' -o tsv)
+  ACCOUNT_KEY=\$5(az storage account keys list --resource-group $RESOURCE_GROUP_NAME --account-name $STORAGE_ACCOUNT_NAME --query '[0].value' -o tsv)
   set ARM_ACCESS_KEY=$ACCOUNT_KEY
   
   terraform -chdir=infra init -input=false
