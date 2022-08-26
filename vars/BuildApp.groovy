@@ -1,6 +1,7 @@
 def call()
 {
 bat label: '', script: '''
+set PATH=%PATH%;'C:/Program Files/dotnet/'
 dotnet new tool-manifest
 dotnet tool install dotnet-ef
 dotnet tool restore
