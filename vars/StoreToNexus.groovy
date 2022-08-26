@@ -13,7 +13,7 @@ def call(username, password)
   $username = ${username}
   $password = ${password}
   $params = @{
-  UseBasicParsing = $true
+  UseBasicParsing = ${true}
   Uri             = $publishUrl
   Method          = 'PUT'
   InFile          = $packageName
@@ -21,7 +21,7 @@ def call(username, password)
     ContentType   = 'application/zip'
     Authorization = 'Basic $([System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("$username`:$password")))' 
   }
-  Verbose         = $true
+  Verbose         = ${true}
   }
   Invoke-WebRequest @params
   """
