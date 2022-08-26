@@ -5,13 +5,13 @@ def call(username, password)
   mkdir PublishFolder
   dotnet publish -o PublishFolder
   '''
-  powershell label: '', script: """
+  powershell label: '', script: '''
   Compress-Archive -Path PublishFolder/* -DestinationPath app.zip
   $version = Get-Content version.txt
   $publishUrl='http://localhost:8081/repository/dotnet-build-artifacts/dotnetcore/sample/'+$version+'/app.zip'
   $packageName = 'app.zip'
-  $username = ${username}
-  $password = ${password}
+  $username = $username
+  $password = $password
   $params = @{
   UseBasicParsing = ${true}
   Uri             = $publishUrl
@@ -19,10 +19,10 @@ def call(username, password)
   InFile          = $packageName
   Headers         = @{
     ContentType   = 'application/zip'
-    Authorization = 'Basic \$5([System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("$username`:$password")))' 
+    Authorization = 'Basic $([System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("$username`:$password")))' 
   }
   Verbose         = ${true}
   }
   Invoke-WebRequest @params
-  """
+  '''
 }
