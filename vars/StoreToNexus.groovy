@@ -6,8 +6,8 @@ def call(username, password)
   dotnet publish -o PublishFolder
   '''
   powershell label: '', script: """
-  $env.$username = ${username}
-  $env.$password = ${password}
+  $env.$user = ${username}
+  $env.$pass = ${password}
   """
   powershell label: '', script: '''
   Compress-Archive -Path PublishFolder/* -DestinationPath app.zip
@@ -21,7 +21,7 @@ def call(username, password)
   InFile          = $packageName
   Headers         = @{
     ContentType   = 'application/zip'
-    Authorization = 'Basic $([System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("$username`:$password")))' 
+    Authorization = 'Basic $([System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("$user`:$pass")))' 
   }
   Verbose         = ${true}
   }
