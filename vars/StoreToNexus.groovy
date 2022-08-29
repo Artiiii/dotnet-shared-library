@@ -6,8 +6,8 @@ def call(username, password)
   dotnet publish -o PublishFolder
   '''
   powershell label: '', script: """
-  $env.\$user = ${username}
-  $env.\$pass = ${password}
+  \$user = ${username}
+  \$pass = ${password}
   """
   powershell label: '', script: '''
   Compress-Archive -Path PublishFolder/* -DestinationPath app.zip
