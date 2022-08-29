@@ -8,7 +8,7 @@ def call()
  
   powershell label: '', script: '''
   Compress-Archive -Path PublishFolder/* -DestinationPath app.zip
-c $version = Get-Content version.txt
+  $version = Get-Content version.txt
   $publishUrl='http://localhost:8081/repository/dotnet-build-artifacts/dotnetcore/sample/'+$version+'/app.zip'
   $packageName = 'app.zip'
   $username = 'admin'
