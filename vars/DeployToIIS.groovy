@@ -5,6 +5,7 @@ def call()
   Write-Output $myip
   Set-Item 'WSMan:localhost/client/trustedhosts' -value '$myip' -Force
   $user = '$myip\\dotnet'
+  Write-Output $user
   Enable-PSRemoting -Force
   $Pass=ConvertTo-SecureString -String 'Devops@123456' -AsPlainText -Force
   $Credential=New-Object System.Management.Automation.PSCredential ("52.170.94.181\\dotnet", $Pass)
