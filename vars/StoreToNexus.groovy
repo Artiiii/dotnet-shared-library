@@ -27,5 +27,4 @@ def call()
   Invoke-WebRequest @params
   '''
 }
-  '''
-}
+
