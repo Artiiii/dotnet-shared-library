@@ -12,9 +12,9 @@ def call(password)
  
  Write-Output "#------ INSTALLING DOTNET CORE HOSTING BUNDLE------#"
  
- $s=New-PSSession -ComputerName 52.170.94.181 -Credential $Credential      
- Invoke-Command -Session $s {
+ $s=New-PSSession -ComputerName 52.170.94.181 -Credential $Credential   
  Copy-Item 'dotnet-hosting-6.0.8-win.exe' 'Downloads/' -ToSession $s
+ Invoke-Command -Session $s {
  $pathvargs = {Downloads/dotnet-hosting-6.0.8-win.exe /S /v/qn }
  Invoke-Command -ScriptBlock $pathvargs
  
