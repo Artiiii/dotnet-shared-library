@@ -20,7 +20,7 @@ def call()
   InFile          = $packageName
   Headers         = @{
     ContentType   = 'application/zip'
-    Authorization = 'Basic $([System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("$username`:$password")))' 
+    Authorization = 'Basic $([System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("admin:admin")))' 
   }
   Verbose         = ${true}
   }
