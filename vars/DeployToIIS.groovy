@@ -11,10 +11,16 @@ def call()
   $Credential=New-Object System.Management.Automation.PSCredential ($user, $Pass)
   $s=New-PSSession -ComputerName $myip -Credential $Credential
   Write-Output $s
-  Invoke-Command -Session $s {Remove-Item 'C:/inetpub/wwwroot/app.zip'}
+  Invoke-Command -Session $s {
+  
+ if (Test-Path "C:/inetpub/wwwroot/app.zip" ) {
+     Remove-Item 'C:/inetpub/wwwroot/app.zip'
+ }
+}
   Copy-Item 'app.zip' 'C:/inetpub/wwwroot/' -ToSession $s
   Invoke-Command -Session $s {
-  Remove-Item 'C:/inetpub/wwwroot/dotnetcore/*' -Recurse
+  if (Test-Path "C:/inetpub/wwwroot/dotnetcore/*" ) {
+  Remove-Item 'C:/inetpub/wwwroot/dotnetcore/*' -Recurse }
   Expand-Archive -Path 'C:/inetpub/wwwroot/app.zip' -DestinationPath 'C:/inetpub/wwwroot/dotnetcore'}
 '''
 }
