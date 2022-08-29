@@ -1,12 +1,13 @@
 def call()
 {
-  powershell label:'', script: '''
-  Set-Item 'WSMan:localhost/client/trustedhosts' -value '104.41.133.141' -Force
-  Enable-PSRemoting -Force
-  $Pass=ConvertTo-SecureString -String 'Devops@123456' -AsPlainText -Force
-  $Credential=New-Object System.Management.Automation.PSCredential ("104.41.133.141\\dotnet", $Pass)
-  $s=New-PSSession -ComputerName '104.41.133.141' -Credential $Credential
-  Write-Output $s
-  Invoke-Command -Session $s {Start-Website "dotnetcore"}
-  '''
+ powershell label:'', script: '''
+ $myip = Get-Content output.txt
+ Set-Item 'WSMan:localhost/client/trustedhosts' -value "$myip" -Force
+ Enable-PSRemoting -Force
+ $user="$myip\\dotnet"
+ $Pass=ConvertTo-SecureString -String 'Devops@123456' -AsPlainText -Force
+ $Credential=New-Object System.Management.Automation.PSCredential ($user, $Pass) 
+ $s=New-PSSession -ComputerName $myip -Credential $Credential   
+ Invoke-Command -Session $s {Start-Website "dotnetcore"}
+ '''
 }
