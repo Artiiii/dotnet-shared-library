@@ -19,11 +19,13 @@ def call(password)
  if($exists -eq "True")
  {
  Write-Output "File Exists"
+ $pathvargs = { & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn }
+ Invoke-Command -ScriptBlock $pathvargs -Session $s
  }
  else{
  Copy-Item 'dotnet-hosting-6.0.8-win.exe' 'C:/inetpub/wwwroot' -ToSession $s
  $pathvargs = { & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn }
- Invoke-Command -ScriptBlock $pathvargs
+ Invoke-Command -ScriptBlock $pathvargs -Session $s
  }
 
  
@@ -52,10 +54,12 @@ New-Item IIS:/AppPools/$iisAppPoolName
 Set-ItemProperty IIS:/AppPools/$iisAppPoolName -name "managedRuntimeVersion" -value $iisAppPoolDotNetVersion  
 }    
 if (!(Test-Path IIS:/Sites/$iisWebsiteName -pathType container))  
-{  
+{ 
+if (!(Test-Path "IIS:/Sites/Default Web Site" -pathType container)) {
 Remove-Website "Default Web Site"
-New-Item IIS:/Sites/iisWebsiteName -bindings $iisWebsiteBindings -physicalPath $iisWebsiteFolderPath  
-Set-ItemProperty IIS:/ites/iisWebsiteName -name applicationPool -value $iisAppPoolName  
+}
+New-Item IIS:/Sites/$iisWebsiteName -bindings $iisWebsiteBindings -physicalPath $iisWebsiteFolderPath  
+Set-ItemProperty IIS:/Sites/$iisWebsiteName -name applicationPool -value $iisAppPoolName  
 }  
 Stop-WebSite "dotnetcore"
 }
