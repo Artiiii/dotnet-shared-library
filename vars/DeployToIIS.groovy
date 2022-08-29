@@ -8,7 +8,7 @@ def call()
   Enable-PSRemoting -Force
   $Pass=ConvertTo-SecureString -String 'Devops@123456' -AsPlainText -Force
   $Credential=New-Object System.Management.Automation.PSCredential ("52.170.94.181\\dotnet", $Pass)
-  $s=New-PSSession -ComputerName '$myip' -Credential $Credential
+  $s=New-PSSession -ComputerName $myip -Credential $Credential
   Write-Output $s
   Invoke-Command -Session $s {Remove-Item 'C:/inetpub/wwwroot/app.zip'}
   Copy-Item 'app.zip' 'C:/inetpub/wwwroot/' -ToSession $s
