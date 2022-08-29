@@ -1,18 +1,19 @@
 def call(password)
 {
  powershell label: '', script: '''
- #52.170.94.181 = Get-Content output.txt
- $password = ${password}
- Set-Item 'WSMan:localhost/client/trustedhosts' -value '52.170.94.181' -Force
+ $myip = Get-Content output.txt
+ #$password = ${password}
+ Set-Item 'WSMan:localhost/client/trustedhosts' -value "$myip" -Force
  Enable-PSRemoting -Force
+ $user="$myip\\dotnet"
  $Pass=ConvertTo-SecureString -String 'Devops@123456' -AsPlainText -Force
- $Credential=New-Object System.Management.Automation.PSCredential ("52.170.94.181\\dotnet", $Pass)
+ $Credential=New-Object System.Management.Automation.PSCredential ($user, $Pass)
  
  Write-Output "####### PS SESSION TO REMOTE #########"
  
  Write-Output "#------ INSTALLING DOTNET CORE HOSTING BUNDLE------#"
  
- $s=New-PSSession -ComputerName 52.170.94.181 -Credential $Credential   
+ $s=New-PSSession -ComputerName $myip -Credential $Credential   
  Copy-Item 'dotnet-hosting-6.0.8-win.exe' 'C:/inetpub/wwwroot' -ToSession $s
  Invoke-Command -Session $s {
  $pathvargs = { & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn }
