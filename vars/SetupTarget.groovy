@@ -27,8 +27,10 @@ def call(password)
  }
  else{
  Copy-Item 'dotnet-hosting-6.0.8-win.exe' 'C:/inetpub/wwwroot' -ToSession $s
- $pathvargs = { & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn }
- Invoke-Command -ScriptBlock $pathvargs -Session $s
+ Invoke-Command -Session $s { 
+ & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn 
+ Start-Sleep 30
+ }
  }
 
  
