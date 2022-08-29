@@ -24,13 +24,13 @@ def call(password)
  Write-Output $Exists
  if(!$Exists)
  {
- if (Test-Path "C:\inetpub\wwwroot\dotnetcoresql" ) {
+ if (Test-Path "C:/inetpub/wwwroot/dotnetcoresql" ) {
  
      Write-Host "Folder Exists"
      Remove-Item "C:\inetpub\wwwroot\dotnetcoresql" -Force
  }
- New-Item "C:\inetpub\wwwroot\dotnetcoresql" -ItemType Directory
- New-WebSite -Name "dotnetcore" -Port "98" -PhysicalPath "C:\inetpub\wwwroot\dotnetcoresql"
+ New-Item "C:/inetpub/wwwroot/dotnetcoresql" -ItemType Directory
+ New-WebSite -Name "dotnetcore" -Port "98" -PhysicalPath "C:/inetpub/wwwroot/dotnetcoresql"
  }
  else
  {
