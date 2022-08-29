@@ -19,8 +19,8 @@ def call()
 }
   Copy-Item 'app.zip' 'C:/inetpub/wwwroot/' -ToSession $s
   Invoke-Command -Session $s {
-  if (Test-Path "C:/inetpub/wwwroot/dotnetcore/*" ) {
-  Remove-Item 'C:/inetpub/wwwroot/dotnetcore/*' -Recurse }
-  Expand-Archive -Path 'C:/inetpub/wwwroot/app.zip' -DestinationPath 'C:/inetpub/wwwroot/dotnetcore'}
+  if (Test-Path "C:/inetpub/wwwroot/dotnetcoresql/*" ) {
+  Remove-Item 'C:/inetpub/wwwroot/dotnetcoresql/*' -Recurse }
+  Expand-Archive -Path 'C:/inetpub/wwwroot/app.zip' -DestinationPath 'C:/inetpub/wwwroot/dotnetcoresql'}
 '''
 }
