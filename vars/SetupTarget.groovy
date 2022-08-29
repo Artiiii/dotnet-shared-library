@@ -29,6 +29,8 @@ def call(password)
  
  
  Write-Output "#------- CREATE IIS WEBSITE OR STOP WEBSITE iF ALREADY EXISTS------------------#"
+ 
+ Invoke-Command -Session $s {
  if (Test-Path "C:/inetpub/wwwroot/dotnetcoresql" ) {
  
      Write-Host "Folder Exists"
