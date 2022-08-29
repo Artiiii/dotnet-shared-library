@@ -56,9 +56,7 @@ Set-ItemProperty IIS:/AppPools/$iisAppPoolName -name "managedRuntimeVersion" -va
 }    
 if (!(Test-Path IIS:/Sites/$iisWebsiteName -pathType container))  
 { 
-if (!(Test-Path "IIS:/Sites/Default Web Site" -pathType container)) {
-Remove-Website "Default Web Site"
-}
+Remove-WebBinding -Port 80
 New-Item IIS:/Sites/$iisWebsiteName -bindings $iisWebsiteBindings -physicalPath $iisWebsiteFolderPath  
 Set-ItemProperty IIS:/Sites/$iisWebsiteName -name applicationPool -value $iisAppPoolName  
 }  
