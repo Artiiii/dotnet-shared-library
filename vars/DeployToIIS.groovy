@@ -4,9 +4,10 @@ def call()
   $myip=Get-Content output.txt
   Write-Output $myip
   Set-Item 'WSMan:localhost/client/trustedhosts' -value '$myip' -Force
+  $user = '$myip\\dotnet'
   Enable-PSRemoting -Force
   $Pass=ConvertTo-SecureString -String 'Devops@123456' -AsPlainText -Force
-  $Credential=New-Object System.Management.Automation.PSCredential ("$myip\\dotnet", $Pass)
+  $Credential=New-Object System.Management.Automation.PSCredential ($user, $Pass)
   $s=New-PSSession -ComputerName $myip -Credential $Credential
   Write-Output $s
   Invoke-Command -Session $s {Remove-Item 'C:/inetpub/wwwroot/app.zip'}
