@@ -10,6 +10,8 @@ def call()
   Compress-Archive -Path PublishFolder/* -DestinationPath app.zip
   $version = Get-Content version.txt
   $publishUrl='http://localhost:8081/repository/dotnet-build-artifacts/dotnetcore/sample/'+$version+'/app.zip'
+  $username = 'admin'
+  $password = 'admin'
   $packageName = 'app.zip'
   $params = @{
   UseBasicParsing = ${true}
@@ -18,7 +20,7 @@ def call()
   InFile          = $packageName
   Headers         = @{
     ContentType   = 'application/zip'
-    Authorization = 'Basic $([System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("admin`:admin")))' 
+    Authorization = 'Basic $([System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("$username`:$password")))' 
   }
   Verbose         = ${true}
   }
