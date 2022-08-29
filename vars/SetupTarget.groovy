@@ -39,7 +39,7 @@ def call(password)
 Import-Module WebAdministration    
 $iisAppPoolName = "dotnetcoresql"  
 $iisAppPoolDotNetVersion = "v4.0"    
-$iisWebsiteFolderPath = "C:\inetpub\wwwroot\dotnetcoresql"  
+$iisWebsiteFolderPath = "C:/inetpub/wwwroot/dotnetcoresql"  
 $iisWebsiteName = "dotnetcoresql"  
 $iisWebsiteBindings = @(  
    @{protocol="http";bindingInformation="*:80:"}
