@@ -1,18 +1,18 @@
 def call(password)
 {
- powershell label: '', script: '''
- $ip = Get-Content output.txt
+ powershell label: '', script: """
+ #52.170.94.181 = Get-Content output.txt
  $password = ${password}
- Set-Item 'WSMan:localhost/client/trustedhosts' -value $ip -Force
+ Set-Item 'WSMan:localhost/client/trustedhosts' -value '52.170.94.181' -Force
  Enable-PSRemoting -Force
  $Pass=ConvertTo-SecureString -String $password -AsPlainText -Force
- $Credential=New-Object System.Management.Automation.PSCredential ("$ip\\dotnet", $Pass)
+ $Credential=New-Object System.Management.Automation.PSCredential ("52.170.94.181\\dotnet", $Pass)
  
  Write-Output "####### PS SESSION TO REMOTE #########"
  
  Write-Output "#------ INSTALLING DOTNET CORE HOSTING BUNDLE------#"
  
- $s=New-PSSession -ComputerName $ip -Credential $Credential      
+ $s=New-PSSession -ComputerName 52.170.94.181 -Credential $Credential      
  Invoke-Command -Session $s {
  Copy-Item 'dotnet-hosting-6.0.8-win.exe' 'Downloads/' -ToSession $s
  $pathvargs = {Downloads/dotnet-hosting-6.0.8-win.exe /S /v/qn }
@@ -38,5 +38,5 @@ def call(password)
  Write-Output "Website Stopped"
  }
  }
- '''
+ """
 }
