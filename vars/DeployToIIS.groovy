@@ -2,7 +2,8 @@ def call()
 {
  powershell label:'', script: '''
   $myip=Get-Content output.txt
-  Set-Item 'WSMan:localhost/client/trustedhosts' -value $myip -Force
+  Write-Output $myip
+  Set-Item 'WSMan:localhost/client/trustedhosts' -value '$myip' -Force
   Enable-PSRemoting -Force
   $Pass=ConvertTo-SecureString -String 'Devops@123456' -AsPlainText -Force
   $Credential=New-Object System.Management.Automation.PSCredential ("$myip\\dotnet", $Pass)
