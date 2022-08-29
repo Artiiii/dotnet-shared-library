@@ -15,7 +15,7 @@ def call(password)
  $s=New-PSSession -ComputerName 52.170.94.181 -Credential $Credential   
  Copy-Item 'dotnet-hosting-6.0.8-win.exe' 'C:/inetpub/wwwroot' -ToSession $s
  Invoke-Command -Session $s {
- $pathvargs = {'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn }
+ $pathvargs = {C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe /S /v/qn }
  Invoke-Command -ScriptBlock $pathvargs
  
  Write-Output "#------- CREATE IIS WEBSITE OR STOP WEBSITE iF ALREADY EXISTS------------------#"
