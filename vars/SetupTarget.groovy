@@ -65,7 +65,6 @@ New-Item IIS:/Sites/$iisWebsiteName -bindings $iisWebsiteBindings -physicalPath 
 Set-ItemProperty IIS:/Sites/$iisWebsiteName -name applicationPool -value $iisAppPoolName  
 }  
 Stop-WebSite $iisWebsiteName
-Remove-Item "C:/inetpub/wwwroot/dotnetcoresql" -Force
 }
  '''
 }
