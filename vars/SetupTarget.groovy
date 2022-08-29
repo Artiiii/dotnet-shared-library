@@ -19,10 +19,6 @@ def call(password)
  if($exists -eq "True")
  {
  Write-Output "File Exists"
- $pathvargs = { & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn }
- Invoke-Command -Session $s { 
- & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn 
- Start-Sleep 30
  }
  }
  else{
@@ -48,7 +44,7 @@ def call(password)
 Import-Module WebAdministration    
 $iisAppPoolName = "dotnetcoresql"  
 $iisAppPoolDotNetVersion = "v4.0"    
-$iisWebsiteFolderPath = "C:/inetpub/wwwroot/dotnetcoresql"  
+$iisWebsiteFolderPath = "C:\\inetpub\\wwwroot\\dotnetcoresql"  
 $iisWebsiteName = "dotnetcoresql"  
 $iisWebsiteBindings = @(  
    @{protocol="http";bindingInformation="*:80:"}
@@ -66,7 +62,7 @@ Remove-Website "Default Web Site"
 New-Item IIS:/Sites/$iisWebsiteName -bindings $iisWebsiteBindings -physicalPath $iisWebsiteFolderPath  
 Set-ItemProperty IIS:/Sites/$iisWebsiteName -name applicationPool -value $iisAppPoolName  
 }  
-Stop-WebSite $iisWebsiteName
+Stop-WebAppPool $iisAppPoolName
 }
  '''
 }
