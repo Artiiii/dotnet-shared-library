@@ -20,7 +20,10 @@ def call(password)
  {
  Write-Output "File Exists"
  $pathvargs = { & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn }
- Invoke-Command -ScriptBlock $pathvargs -Session $s
+ Invoke-Command -Session $s { 
+ & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn 
+ Start-Sleep 10
+ }
  }
  else{
  Copy-Item 'dotnet-hosting-6.0.8-win.exe' 'C:/inetpub/wwwroot' -ToSession $s
@@ -61,7 +64,7 @@ Remove-Website "Default Web Site"
 New-Item IIS:/Sites/$iisWebsiteName -bindings $iisWebsiteBindings -physicalPath $iisWebsiteFolderPath  
 Set-ItemProperty IIS:/Sites/$iisWebsiteName -name applicationPool -value $iisAppPoolName  
 }  
-Stop-WebSite "dotnetcore"
+Stop-WebSite $iisWebsiteName
 }
  '''
 }
