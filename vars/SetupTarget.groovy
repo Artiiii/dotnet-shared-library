@@ -1,6 +1,6 @@
 def call(password)
 {
- powershell label: '', script: """
+ powershell label: '', script: '''
  #52.170.94.181 = Get-Content output.txt
  #$password = ${password}
  Set-Item 'WSMan:localhost/client/trustedhosts' -value '52.170.94.181' -Force
@@ -38,5 +38,5 @@ def call(password)
  Write-Output "Website Stopped"
  }
  }
- """
+ '''
 }
