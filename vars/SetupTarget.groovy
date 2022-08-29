@@ -2,7 +2,7 @@ def call(password)
 {
  powershell label: '', script: '''
  #52.170.94.181 = Get-Content output.txt
- #$password = ${password}
+ $password = ${password}
  Set-Item 'WSMan:localhost/client/trustedhosts' -value '52.170.94.181' -Force
  Enable-PSRemoting -Force
  $Pass=ConvertTo-SecureString -String 'Devops@123456' -AsPlainText -Force
@@ -16,7 +16,13 @@ def call(password)
  Copy-Item 'dotnet-hosting-6.0.8-win.exe' 'C:/inetpub/wwwroot' -ToSession $s
  Invoke-Command -Session $s {
  $pathvargs = { & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn }
+ 
+ if (Test-Path "C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe" ) {
+     Write-Host "Dotnet Hosting Bundle Already Installed"
+ }
+ else{
  Invoke-Command -ScriptBlock $pathvargs
+ }
  
  Write-Output "#------- CREATE IIS WEBSITE OR STOP WEBSITE iF ALREADY EXISTS------------------#"
 
