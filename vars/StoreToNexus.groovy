@@ -8,6 +8,7 @@ def call(username, password)
   powershell label: '', script: """
   \$user = ${username}
   \$pass = ${password}
+  Wrote-Output "Completed"
   """
   powershell label: '', script: '''
   Compress-Archive -Path PublishFolder/* -DestinationPath app.zip
