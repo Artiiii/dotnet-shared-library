@@ -22,7 +22,7 @@ def call(password)
  $pathvargs = { & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn }
  Invoke-Command -Session $s { 
  & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn 
- Start-Sleep 10
+ Start-Sleep 30
  }
  }
  else{
@@ -39,10 +39,10 @@ def call(password)
  if (Test-Path "C:/inetpub/wwwroot/dotnetcoresql" ) {
  
      Write-Host "Folder Exists"
-     Remove-Item "C:/inetpub/wwwroot/dotnetcoresql" -Force
  }
+ else {
  New-Item "C:/inetpub/wwwroot/dotnetcoresql" -ItemType Directory
-
+}
 Import-Module WebAdministration    
 $iisAppPoolName = "dotnetcoresql"  
 $iisAppPoolDotNetVersion = "v4.0"    
@@ -65,6 +65,7 @@ New-Item IIS:/Sites/$iisWebsiteName -bindings $iisWebsiteBindings -physicalPath 
 Set-ItemProperty IIS:/Sites/$iisWebsiteName -name applicationPool -value $iisAppPoolName  
 }  
 Stop-WebSite $iisWebsiteName
+Remove-Item "C:/inetpub/wwwroot/dotnetcoresql" -Force
 }
  '''
 }
