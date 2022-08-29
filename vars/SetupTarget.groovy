@@ -1,6 +1,6 @@
 def call(password)
 {
- powershell label: '', script: """
+ powershell label: '', script: '''
  $ip = Get-Content output.txt
  $password = ${password}
  Set-Item 'WSMan:localhost/client/trustedhosts' -value $ip -Force
@@ -38,5 +38,5 @@ def call(password)
  Write-Output "Website Stopped"
  }
  }
- """ 
+ '''
 }
