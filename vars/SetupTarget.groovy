@@ -2,10 +2,10 @@ def call(password)
 {
  powershell label: '', script: """
  #52.170.94.181 = Get-Content output.txt
- $password = ${password}
+ #$password = ${password}
  Set-Item 'WSMan:localhost/client/trustedhosts' -value '52.170.94.181' -Force
  Enable-PSRemoting -Force
- $Pass=ConvertTo-SecureString -String $password -AsPlainText -Force
+ $Pass=ConvertTo-SecureString -String 'Devops@123456' -AsPlainText -Force
  $Credential=New-Object System.Management.Automation.PSCredential ("52.170.94.181\\dotnet", $Pass)
  
  Write-Output "####### PS SESSION TO REMOTE #########"
