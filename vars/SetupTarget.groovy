@@ -20,7 +20,6 @@ def call(password)
  {
  Write-Output "File Exists"
  }
- }
  else{
  Copy-Item 'dotnet-hosting-6.0.8-win.exe' 'C:/inetpub/wwwroot' -ToSession $s
  Invoke-Command -Session $s { 
