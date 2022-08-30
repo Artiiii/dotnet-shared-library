@@ -25,6 +25,7 @@ def call(password)
  Invoke-Command -Session $s { 
  & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn 
  Start-Sleep 50
+ Write-Output "Successfully Installed Dotnet Core Hosting Bundle"
  }
  }
 
@@ -57,9 +58,12 @@ if (!(Test-Path IIS:/Sites/$iisWebsiteName -pathType container))
 { 
 Remove-WebBinding -Port 80
 New-Item IIS:/Sites/$iisWebsiteName -bindings $iisWebsiteBindings -physicalPath $iisWebsiteFolderPath  
-Set-ItemProperty IIS:/Sites/$iisWebsiteName -name applicationPool -value $iisAppPoolName  
+Set-ItemProperty IIS:/Sites/$iisWebsiteName -name applicationPool -value $iisAppPoolName 
+ Write-Output "Successfully Created IIS Website"
 }  
+Write-Output "Stopping App pool ...."
 Stop-WebAppPool $iisAppPoolName
+Write-Output "Stopped App Pool"
 }
  '''
 }
