@@ -24,7 +24,7 @@ def call(password)
  Copy-Item 'dotnet-hosting-6.0.8-win.exe' 'C:/inetpub/wwwroot' -ToSession $s
  Invoke-Command -Session $s { 
  & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn 
- Start-Sleep 30
+ Start-Sleep 50
  }
  }
 
