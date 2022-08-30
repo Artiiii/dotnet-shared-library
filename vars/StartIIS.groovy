@@ -8,6 +8,8 @@ def call()
  $Pass=ConvertTo-SecureString -String 'Devops@123456' -AsPlainText -Force
  $Credential=New-Object System.Management.Automation.PSCredential ($user, $Pass) 
  $s=New-PSSession -ComputerName $myip -Credential $Credential   
- Invoke-Command -Session $s {Start-WebAppPool "dotnetcoresql"}
+ Invoke-Command -Session $s {
+ Start-WebAppPool "dotnetcoresql"
+ Start-Website "dotnetcoresql"}
  '''
 }
