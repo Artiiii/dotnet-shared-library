@@ -1,12 +1,10 @@
 def call(password)
 {
- powershell label: '', script: '''
+ powershell label: '', script: """
  $myip = Get-Content output.txt
- #$password = ${password}
- Set-Item 'WSMan:localhost/client/trustedhosts' -value "$myip" -Force
- Enable-PSRemoting -Force
+ $password = ${password}
  $user="$myip\\dotnet"
- $Pass=ConvertTo-SecureString -String 'Devops@123456' -AsPlainText -Force
+ $Pass=ConvertTo-SecureString -String '$password' -AsPlainText -Force
  $Credential=New-Object System.Management.Automation.PSCredential ($user, $Pass)
  
  Write-Output "####### PS SESSION TO REMOTE #########"
@@ -23,7 +21,7 @@ def call(password)
  else{
  Copy-Item 'dotnet-hosting-6.0.8-win.exe' 'C:/inetpub/wwwroot' -ToSession $s
  Invoke-Command -Session $s { 
- & 'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/qn 
+'C:/inetpub/wwwroot/dotnet-hosting-6.0.8-win.exe' /S /v/n 
  Start-Sleep 50
  Write-Output "Successfully Installed Dotnet Core Hosting Bundle"
  }
@@ -47,7 +45,7 @@ $iisAppPoolDotNetVersion = "v4.0"
 $iisWebsiteFolderPath = "C:\\inetpub\\wwwroot\\dotnetcoresql"  
 $iisWebsiteName = "dotnetcoresql"  
 $iisWebsiteBindings = @(  
-   @{protocol="http";bindingInformation="*:80:"}
+   {protocol="http";bindingInformation="80"}
 )
 if (!(Test-Path IIS:/AppPools/$iisAppPoolName -pathType container))  
 {  
@@ -59,7 +57,7 @@ if (!(Test-Path IIS:/Sites/$iisWebsiteName -pathType container))
 Remove-WebBinding -Port 80
 New-Item IIS:/Sites/$iisWebsiteName -bindings $iisWebsiteBindings -physicalPath $iisWebsiteFolderPath  
 Set-ItemProperty IIS:/Sites/$iisWebsiteName -name applicationPool -value $iisAppPoolName 
- Write-Output "Successfully Created IIS Website"
+Write-Output "Successfully Created IIS Website"
 }  
 Write-Output "Stopping App pool ...."
 Stop-WebAppPool $iisAppPoolName
